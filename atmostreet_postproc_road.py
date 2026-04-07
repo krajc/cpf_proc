@@ -21,18 +21,22 @@ crs_wkt = 'PROJCS["Lambert_Conformal_Conic",GEOGCS["GCS_WGS_1984",DATUM["D_unkno
     PARAMETER["latitude_of_origin",47.7],PARAMETER["central_meridian",19.5],\
     PARAMETER["false_easting",200000],PARAMETER["false_northing",0],UNIT["Meter",1]]'
 
-dom = 'banskabystrica'  
+
+    
 year = 2024                                                                                                                                        
 inpdir = f"/data/users/p6065/ATMOSTREET/Results/{year}/SR_2024/Traffic"
 outdir = "/data/users/p2993/data_cpf/netcdf_road"
 
+'''
+This part is only  run once or when ATMOSTREET output changes:
 ds = xr.Dataset()
 for spc in ['pm10','pm25','no2','bap', 'ben']:
-    
+    print (f"Domain: {dom}\tPollutant: {spc}\n")
     atm = rioxarray.open_rasterio(f"{inpdir}/{spc.upper()}_Mean_ATMO-Street.tif")
     atm = atm.where(atm != -9999.0, np.nan)
     ds[spc.upper()] = atm
     
+print ("Add resuspension for PM...\n")
 r10 = rioxarray.open_rasterio(f"{inpdir}/R10_Mean_ATMO-Street.tif")
 r10 = r10.where(r10 != -9999.0, np.nan)
 r25 = rioxarray.open_rasterio(f"{inpdir}/R25_Mean_ATMO-Street.tif")
@@ -46,7 +50,11 @@ ds = ds.where(ds != -9999.0, np.nan)
 ds = ds.where(ds < 1000, np.nan)
 ds = ds.squeeze('band')
 del ds.coords['band']
+# Save:
+ds.to_netcdf(f'{outdir}/SR_LCC_{year}.nc')
+'''
 
+ds = xr.open_dataset(f'{outdir}/SR_LCC_{year}.nc')
 # clipping to domains:
 olddoms = [ 'banskabystrica','ruzomberok']
 domtable = gpd.read_file(f"/data/oko/krajc/cpf_domeny/new_doms_{year}_LCCcpf_processed/new_doms_{year}_LCCcpf_processed.shp")
@@ -59,7 +67,7 @@ for dom in doms:
 
 
 
-#### Procesing timeseries #######
+#### Procesing timeseries at receptor points #######
 atmodir = f"/data/users/p6065/ATMOSTREET/Results/{year}/SR_2024/Traffic"
 outdir = "/data/users/p2993/data_cpf/timeseries_road"
 
@@ -70,7 +78,7 @@ def table (spc):
     if spc == 'NO2':
         t = pd.read_csv(f"{atmodir}/{spc}_HourlyTimeseries_ATMO-Street_Indicators.csv")
     else:
-        t = pd.read_csv(f"{atmodir}/{spc}_HourlyTimeseries_IFDM_Indicators.csv")
+        t = pd.read_csv(f"{atmodir}/{spc}_HourlyTimeseries_ATMO-Street_Indicators.csv")
     t.index = indx
     tdaily = t.resample('D').mean()
     return tdaily
