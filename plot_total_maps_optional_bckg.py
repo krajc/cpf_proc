@@ -157,7 +157,8 @@ amsmesta = ['martin','zilina','ruzomberok','kosice','krompachy','banskabystrica'
 manbackg = ['banskabystrica','hnusta','zarnovicanb','martin','prievidza', 'bratislava',
             'krompachy','kosice','nitra', 'juznyhont']
 
-doms = ['banskabystrica']
+doms = ['banskabystrica', 'BB1','KE1', 'TN1', 'PO1','PO2','PO3','KE2','KE3']
+
 '''
 doms = ['banskabystrica','zarnovicanb','martin','prievidza']
 doms = ['kosice', 'krompachy']
@@ -168,7 +169,15 @@ groups = ['heat', 'road','neis']
 
 spcs = ['PM10','PM25','NO2','BAP']
 
+# Nacitanie domen:
+newdoms = gpd.read_file(f"/data/oko/krajc/cpf_domeny/all_doms_LCCcpf_processed/new_doms_{year}_processed.gpkg")
+newdoms.set_index('index', inplace=True)
+# Pridanie stlpcov so suradnicami pozadovych bodov:
+newdoms['lcc_x'] = 0
+newdoms['lcc_y'] = 0
+
 for dom in doms:
+    dom = dom.lower()
     if dom == 'kosice':
         levs = {
             'BAP':[0,7],
@@ -228,7 +237,9 @@ for dom in doms:
         for par in list(rioMean.data_vars)[1:]:
             minval[par] = [float(minarr[par]),float(minarr.coords['x']), float(minarr.coords['y'])]
     
-    
+    # Zapis automaticky urcenych min bodov (podla PM10) do tabulky domen:
+    if suff != '-man':
+        newdoms.loc[dom.upper(), ['lcc_x', 'lcc_y']] = [minval['pm10'][1], minval['pm10'][2]]
     # Vytvorenie backg datasetu s konstantnymi hodnotami:
     conc['backg'] = conc['road'].copy()
     for spc in spcs:
@@ -281,6 +292,11 @@ for dom in doms:
            
             plotting(lcc, cif , spc, figtitle, show_points,mark, figname, asp,levs[spc])
             #plotting(lcc, cif , spc, figtitle, show_st,    figname, asp, 0)
+
+# Zapis urcenych pozadovych bodov do suboru:
+newdoms.to_file(f"/data/oko/krajc/dbase_calpuff/geodat/background_points/doms_{year}_automatic_bckgr.gpkg",
+                driver='GPKG')
+
 
 ### >>>>>>>> Vykreslovanie subgroups <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
