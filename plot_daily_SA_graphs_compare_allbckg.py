@@ -54,6 +54,8 @@ doms = ['martin']
 doms = ['kosice']
 doms = ['banskabystrica','zarnovicanb','martin','prievidza']
 doms = ['banskabystrica']
+atmodir = "/data/users/p6065/ATMOSTREET/Results/2024/SR_2024/Traffic"
+
 
 def sample_grid(dom, group, spc, rec, eolcodes):
     ncfile = f"/data/users/p2993/data_cpf/netcdf/{year}/{dom}/{dom}-{year}-{group}.nc"
@@ -81,14 +83,14 @@ def process_domain(dom, spc, rec, eoi, ams_daily, amsr_daily):
        
     if spc in ('PM10', 'PM25'):
         atmodir = "/data/users/p2993/data_cpf/timeseries_road"
-        datafile['road'] = f"{atmodir}/{spc}-total-{dom}-{year}.csv"
+        datafile['road'] = f"{atmodir}/{spc}-total-SR-{year}.csv"
         road_df = pd.read_csv(f"{datafile['road']}")
         road_df.index = indxd
         road_daily = road_df[eoi]
         
     else:
             
-        atmodir = "/data/users/p6065/ATMOSTREET/Results/2024/Bratislava_2024/Traffic"
+        atmodir = "/data/users/p6065/ATMOSTREET/Results/2024/SR_2024/Traffic"
         datafile['road'] = f"{atmodir}/{spc.upper()}_HourlyTimeseries_ATMO-Street_Indicators.csv"
         road_df = pd.read_csv(f"{datafile['road']}")
         road_df.index = indx
@@ -190,34 +192,35 @@ def process_domain(dom, spc, rec, eoi, ams_daily, amsr_daily):
         figname = f'{pics}/interp_sa_monthly_{ii}-{spc}-comp.png'
         title = f"Príspevky jednotlivých skupín zdrojov k priemerným mesačným koncentráciám {spc}\
             \n{eoi[ii]}\n\n"
+        bar_width = 0.30
         ax = rplot.plot(figsize = (10, 5), kind='bar', stacked=True, color=colorsM,\
-                            title=title, rot=45,edgecolor='black', legend=False)
+                            title=title, rot=45,edgecolor='black', legend=False, width=bar_width)
         # 2. Record how many bar segments exist before adding the second set
         n_patches_first = len(ax.patches)
 
         # 3. Plot the second dataframe (Ghost/Hatched) on the same 'ax'
         cplot.plot(kind='bar',stacked=True, ax=ax, color=colorsM, alpha=0.4, \
-                         hatch='//', edgecolor='green', legend=False,  rot=45)
+                         hatch='//', edgecolor='green', legend=False,  rot=45, width=bar_width)
 
         # 4. Shift the second set of bars horizontally
-        shift = 0.15  # Adjust this value for more or less overlap
+        shift = 0.30  # Adjust this value for more or less overlap
         for i in range(n_patches_first, len(ax.patches)):
             patch = ax.patches[i]
             patch.set_x(patch.get_x() + shift)
         
         # 5. Plot the third dataframe (Ghost/Hatched) on the same 'ax'
         cplot2.plot(kind='bar',stacked=True, ax=ax, color=colorsM, alpha=0.4, \
-                         hatch='..', edgecolor='red', legend=False,  rot=45)
+                         hatch='..', edgecolor='red', legend=False,  rot=45, width=bar_width)
 
         # 6. Shift the second set of bars horizontally
-        shift = -0.30  # Adjust this value for more or less overlap
+        shift = 0.30  # Adjust this value for more or less overlap
         for i in range(n_patches_first, len(ax.patches)):
             patch = ax.patches[i]
             patch.set_x(patch.get_x() + shift)
             
         ax.plot(mnths, ams_monthly[ii],linestyle='None', marker='o', color='yellow', \
                   markeredgecolor='black', label='AMS')
-        ax.legend(ncol=5, fontsize=9, loc='lower center',bbox_to_anchor=(0.5,0.99))
+        ax.legend(ncol=5, fontsize=9, loc='lower center',bbox_to_anchor=(0.5, -0.30))
         
         ax.set_xticklabels(mnths)
         ax.set_ylabel(unit(spc))
@@ -281,6 +284,7 @@ for dom in doms:
         
         for spc in spcs:
             print (f"Working on domain: {dom}, spc: {spc} ....\n\n")
+            atmostreet = pd.read_csv(f"{atmodir}/{spc.upper()}_HourlyTimeseries_ATMO-Street_Indicators.csv")
             # Nacitam tabulku AMS hodnot:
             eoi, ams_daily, amsr_daily = process_ams (dom, spc, rec)
             
