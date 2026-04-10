@@ -3,7 +3,9 @@
 """
 Created on Mon Dec  8 15:51:13 2025
     Making .nc file from ATMOSTREET tiffs, summing PM10 and PM2.5 with resuspension part
-    
+        *summing is done once for whole SR grid and saved as new .nc file
+        *summing is done once for all SR station receptors timeseries and saved
+        *
 @author: p2993
 """
 import rioxarray
@@ -45,27 +47,13 @@ r25 = r25.where(r25 != -9999.0, np.nan)
 ds['PM10'] = ds['PM10'] + r10
 ds['PM25'] = ds['PM25'] + r25
     
-ds = ds.rio.reproject(CRS.from_wkt(crs_wkt))
+ds = ds.rio.reproject(CRS.from_wkt(crs_wkt))PM25-total-tt3-2024.csv
 ds = ds.where(ds != -9999.0, np.nan)
 ds = ds.where(ds < 1000, np.nan)
 ds = ds.squeeze('band')
 del ds.coords['band']
 # Save:
 ds.to_netcdf(f'{outdir}/SR_LCC_{year}.nc')
-'''
-
-ds = xr.open_dataset(f'{outdir}/SR_LCC_{year}.nc')
-# clipping to domains:
-olddoms = [ 'banskabystrica','ruzomberok']
-domtable = gpd.read_file(f"/data/oko/krajc/cpf_domeny/new_doms_{year}_LCCcpf_processed/new_doms_{year}_LCCcpf_processed.shp")
-doms = olddoms + list(domtable['domname'])
-for dom in doms:
-    dom = dom.lower()
-    domshape = gpd.read_file(f"/data/oko/krajc/cpf_domeny/{dom}_LCCcpf/Creg.shp")
-    clipped = ds.rio.clip(domshape.geometry)
-    clipped.to_netcdf(f"{outdir}/annual-{dom}-{year}-road.nc")
-
-
 
 #### Procesing timeseries at receptor points #######
 atmodir = f"/data/users/p6065/ATMOSTREET/Results/{year}/SR_2024/Traffic"
@@ -85,6 +73,23 @@ def table (spc):
 
 pm10 = table('PM10') + table('R10')
 pm25 = table('PM25') + table('R25')
-pm10.to_csv(f"{outdir}/PM10-total-{dom}-{year}.csv")
-pm25.to_csv(f"{outdir}/PM25-total-{dom}-{year}.csv")
+pm10.to_csv(f"{outdir}/PM10-total-SR-{year}.csv")
+pm25.to_csv(f"{outdir}/PM25-total-SR-{year}.csv")
+'''
+# Cut out domains from already summed SR dataset:
+
+ds = xr.open_dataset(f'{outdir}/SR_LCC_{year}.nc')
+# clipping to domains:
+olddoms = [ 'banskabystrica','ruzomberok']
+domtable = gpd.read_file(f"/data/oko/krajc/cpf_domeny/new_doms_{year}_LCCcpf_processed/new_doms_{year}_LCCcpf_processed.shp")
+doms = olddoms + list(domtable['domname'])
+for dom in doms:
+    dom = dom.lower()
+    domshape = gpd.read_file(f"/data/oko/krajc/cpf_domeny/{dom}_LCCcpf/Creg.shp")
+    clipped = ds.rio.clip(domshape.geometry)
+    clipped.to_netcdf(f"{outdir}/annual-{dom}-{year}-road.nc")
+
+
+
+
 
