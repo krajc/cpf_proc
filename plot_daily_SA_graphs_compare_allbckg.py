@@ -50,10 +50,8 @@ nofugitive = ['martin','povazie','pohronie','hnusta','spis','trencin']
 # Mesta pri ktorych je bod pozadia vybrany manualne: 
 manbackg = ['banskabystrica','hnusta','zarnovicanb','martin','prievidza', 'bratislava',
             'kosice', 'krompachy','nitra','juznyhont']
-doms = ['martin']
-doms = ['kosice']
-doms = ['banskabystrica','zarnovicanb','martin','prievidza']
-doms = ['banskabystrica']
+
+doms = [ 'BB1','KE1', 'TN1']
 atmodir = "/data/users/p6065/ATMOSTREET/Results/2024/SR_2024/Traffic"
 
 
@@ -68,24 +66,14 @@ def sample_grid(dom, group, spc, rec, eolcodes):
          
 def process_domain(dom, spc, rec, eoi, ams_daily, amsr_daily):
     
-    # Cesta k vstupom:
-    #atmodir = "/data/users/p6065/atmostreet/Results/DOM_2021_zilinsky_kraj/SectorContribution"
-    '''
-    if dom == 'ruzomberok':
-        atmodir = "/data/users/p6065/atmostreet/Results/Ruzomberok_2021_Traffic/SectorContribution"
-    elif dom == 'banskabystrica':
-        atmodir = "/data/users/p6065/atmostreet/Results/BanskaBystrica_2021_Traffic/SectorContribution"
-    elif dom == 'zilina':
-        atmodir = "/data/users/p6065/atmostreet/Results/Zilina_2021_Traffic/SectorContribution"
-    else:
-    '''
     datafile = {}
        
     if spc in ('PM10', 'PM25'):
         atmodir = "/data/users/p2993/data_cpf/timeseries_road"
         datafile['road'] = f"{atmodir}/{spc}-total-SR-{year}.csv"
         road_df = pd.read_csv(f"{datafile['road']}")
-        road_df.index = indxd
+        road_df.index = indxd           
+
         road_daily = road_df[eoi]
         
     else:
@@ -152,15 +140,12 @@ def process_domain(dom, spc, rec, eoi, ams_daily, amsr_daily):
         sa_daily.columns =  ['RIO', 'CMAQ','CAMS','heating','traffic','NEIS'] 
         sa_monthly = sa_daily.resample('M').mean()
         
-        
         sa_daily['total_RIO'] = sa_daily['RIO'] + sa_daily['heating']+sa_daily['traffic']+sa_daily['NEIS']
         sa_daily['total_CMAQ'] = sa_daily['CMAQ'] + sa_daily['heating']+sa_daily['traffic']+sa_daily['NEIS']
         sa_daily['total_CAMS'] = sa_daily['CAMS'] + sa_daily['heating']+sa_daily['traffic']+sa_daily['NEIS']
         sa_daily['AMS'] = ams_daily[ii].astype(float) 
         sa_daily_plt = sa_daily.drop(columns=['heating','traffic','NEIS']).copy()
         
-        
-                
         plt.rcParams.update({'font.size': 10})
         plt.rcParams.update({'xtick.labelsize': 10})
         plt.rcParams.update({'ytick.labelsize': 10})  
@@ -196,28 +181,30 @@ def process_domain(dom, spc, rec, eoi, ams_daily, amsr_daily):
         ax = rplot.plot(figsize = (10, 5), kind='bar', stacked=True, color=colorsM,\
                             title=title, rot=45,edgecolor='black', legend=False, width=bar_width)
         # 2. Record how many bar segments exist before adding the second set
-        n_patches_first = len(ax.patches)
-
-        # 3. Plot the second dataframe (Ghost/Hatched) on the same 'ax'
-        cplot.plot(kind='bar',stacked=True, ax=ax, color=colorsM, alpha=0.4, \
-                         hatch='//', edgecolor='green', legend=False,  rot=45, width=bar_width)
-
-        # 4. Shift the second set of bars horizontally
-        shift = 0.30  # Adjust this value for more or less overlap
-        for i in range(n_patches_first, len(ax.patches)):
-            patch = ax.patches[i]
-            patch.set_x(patch.get_x() + shift)
+        # Record patches before adding the second set
+        n_patches_center = len(ax.patches)
         
-        # 5. Plot the third dataframe (Ghost/Hatched) on the same 'ax'
-        cplot2.plot(kind='bar',stacked=True, ax=ax, color=colorsM, alpha=0.4, \
-                         hatch='..', edgecolor='red', legend=False,  rot=45, width=bar_width)
-
-        # 6. Shift the second set of bars horizontally
-        shift = 0.30  # Adjust this value for more or less overlap
-        for i in range(n_patches_first, len(ax.patches)):
+        # 2. Plot the left dataframe (cplot)
+        cplot.plot(kind='bar', stacked=True, ax=ax, color=colorsM, alpha=0.4, 
+                   hatch='//', edgecolor='green', legend=False, rot=45, width=bar_width)
+        
+        # Record patches before adding the third set to isolate the left bars
+        n_patches_left = len(ax.patches)
+        
+        # Shift the left bars horizontally (-0.30)
+        for i in range(n_patches_center, n_patches_left):
             patch = ax.patches[i]
-            patch.set_x(patch.get_x() + shift)
-            
+            patch.set_x(patch.get_x() - bar_width) 
+        
+        # 3. Plot the right dataframe (cplot2)
+        cplot2.plot(kind='bar', stacked=True, ax=ax, color=colorsM, alpha=0.4, 
+                    hatch='..', edgecolor='red', legend=False, rot=45, width=bar_width)
+        
+        # 4. Shift the right bars horizontally (+0.30)
+        for i in range(n_patches_left, len(ax.patches)):
+            patch = ax.patches[i]
+            patch.set_x(patch.get_x() + bar_width)
+                    
         ax.plot(mnths, ams_monthly[ii],linestyle='None', marker='o', color='yellow', \
                   markeredgecolor='black', label='AMS')
         ax.legend(ncol=5, fontsize=9, loc='lower center',bbox_to_anchor=(0.5, -0.30))
@@ -259,7 +246,7 @@ def process_ams(dom, spc, rec):
 #############################################################################    
  
 for dom in doms: 
-    
+    dom = dom.lower()
     if dom in manbackg:
         suff = '-man'
     else:
