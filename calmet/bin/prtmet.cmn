@@ -1,0 +1,29 @@
+--------------------------------------------------------------------------------
+                     GRID FILE                                                  
+                  ---------------                                               
+! IMAP = LCC       !                                                            
+! LCCRLAT0 =  47.70N       !                                                    
+! LCCRLON0 =  19.50E       !                                                    
+! LCCRLAT1 =  48.75N       !                                                    
+! LCCRLAT2 =  49.00N       !                                                    
+! LCCFEAST =      200.0    !                                                    
+! LCCFNORTH =        0.0    !                                                   
+! DATUM = WGS-84    !                                                           
+! XREFKM =     320.25    !                                                      
+! YREFKM =      97.00    !                                                      
+! DGRIDKM =       0.25    !                                                     
+ ! NX =           46  !
+ ! NY =           40  !
+ ! NZ =           10  !
+ ! XBTZ =           -1  !
+! ZFACE =      0 !
+! ZFACE =     20 !
+! ZFACE =     40 !
+! ZFACE =    100 !
+! ZFACE =    200 !
+! ZFACE =    400 !
+! ZFACE =    700 !
+! ZFACE =   1100 !
+! ZFACE =   1600 !
+! ZFACE =   2000 !
+! ZFACE =   3000 !

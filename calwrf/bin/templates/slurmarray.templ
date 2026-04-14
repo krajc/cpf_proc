@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --job-name=calwrf___MONTH__     	# Job name
+#SBATCH --partition=user				# Partition (predtym class)
+#SBATCH --mail-type=FAIL          	# Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --nodes=1
+#SBATCH --array=0-__NDAYS__                   	# Pocet taskov
+#SBATCH --time=02:00:00               	# Time limit hrs:min:sec
+#SBATCH --mem=2GB             		# memory limit
+#SBATCH --output=__SLURMLOG__
+
+FILES=(__INPDIR__/*)
+
+srun calwrf ${FILES[$SLURM_ARRAY_TASK_ID]}
+

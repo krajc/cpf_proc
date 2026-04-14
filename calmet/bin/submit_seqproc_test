@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#SBATCH --job-name=calmet_test
+#SBATCH --partition=user          
+#SBATCH --ntasks=1
+#SBATCH --time=04:00:00         
+#SBATCH --mem=4GB             
+#SBATCH --output=/users/p2993/cpf_proc/calmet/bin/tmp/memtest_4g_scratch.log
+/users/p2993/cpf_proc/calmet/bin/seqproc_test.py
+
+##sbatch --partition=user --ntasks=3 --mem=100MB --time=05:00:00 --job-name=calwrf_calmet_mproc --output=/work/users/p2993/calmet/ruzomberok/logs/calmet_wrf_mproc.log /users/p2993/calmet/bin/multiproc_test.py

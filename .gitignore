@@ -1,0 +1,14 @@
+# 1. Ignorovať všetok obsah v podsložkách
+*/*
+
+# 2. Povoliť len adresáre 'bin' a ich obsah
+!*/bin/
+!*/bin/**
+
+# 3. Povoliť základné súborymenovom adresári
+!.gitignore
+!README.md
+
+# 4. Povoliť zložku pre dokumentáciu
+!docs/
+!docs/**

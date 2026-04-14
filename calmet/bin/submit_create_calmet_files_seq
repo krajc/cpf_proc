@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#SBATCH --job-name=calmet_velka_ida
+#SBATCH --partition=user          
+#SBATCH --mail-type=FAIL         
+#SBATCH --ntasks=1
+#SBATCH --time=04:00:00         
+#SBATCH --mem=50GB             
+#SBATCH --output=/work/users/p2993/calmet/velka_ida/logs/camet_wrf_seq.log
+/users/p2993/calmet/bin/create_calmet_files_seq.py
