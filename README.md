@@ -4,6 +4,7 @@
 **Root directory:**   *cpf_proc*
 
 **Sub dierectories:**
+- *aladin*
 - *preproc*
 - *calwrf*
 - *calmet*
@@ -18,9 +19,12 @@ All but one of the scripts is run on HPC3 cluster. One script (`~/python/CPF_pre
 
 ## Main steps
 
+### 0. Converting ALADIN meteo data to CALMET .m3d format
+`~/cpf_proc/aladin/bin/juraj_ALADIN2CALMET.py` 
+ 
 When processing a new domain from scratch, the following steps must be taken. Assuming we want to run CALPUFF for three main emission sectors: residential heating, NEIS and road traffic. 
 ### 1. Setting up the domain (or multiple domains)
-`~/cpf_proc/preproc/0_domains_for_CALPUFF.py` (`srv-atmosys`)
+`~/cpf_proc/preproc/bin/0_domains_for_CALPUFF.py` (`srv-atmosys`)
  
  Na zaklade manualne vytvorenej vrstvy .shp, vytvara .shp subory jednotlivych domen (Vystup: `/data/oko/krajc/cpf_domeny`),  `Creg` a `Mreg`  v `LCCcpf` mapsetoch, ` Domain_conf.yml` (parametre domeny), 
  `geo.dat` pre CALMET a `station_rec.yml` pre CALPUFF. (Vystupy: `/data/oko/krajc/dbase_calpuff/geodat/LCCcpf/<domena>`).
