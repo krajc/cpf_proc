@@ -27,6 +27,9 @@ When processing a new domain from scratch, the following steps must be taken. As
 
  Tento skript vytvorí všetky potrebné dáta a súbory pre spustenie CALMET (okrem meteodát). 
 
+ **POZNÁMKA**
+ (JK): Foldery s výstupmi tohto skriptu: `/data/oko/krajc/cpf_domeny/` a `/data/oko/krajc/dbase_calpuff/geodat/LCCcpf` sú zatiaľ pod mojim userom na atmosyse (nie je na ňom vytvorený user oko001)
+
  ### 2. Running CALMET
  Procedures for running CALMET are described in detail in [CALMET (`calmet`)](docs/calmet.md) 
  Before proceeding to the next step - running CALPUFF - it is advisable to look at the meteo data produced by CALMET and, if possible, validate them against a meteo station data, if available. 
