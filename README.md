@@ -39,6 +39,9 @@ When processing a new domain from scratch, the following steps must be taken. As
  Before proceeding to the next step - running CALPUFF - it is advisable to look at the meteo data produced by CALMET and, if possible, validate them against a meteo station data, if available. 
  This is done through series of scripts described in [PRTMET (`prtmet`)](docs/prtmet.md)
 
+ ### 3. Preparing discrete receptors file
+ Before running CALPUFF, we need prepare receptor files, which is done in `~/cpf_proc/preproc/1_create_discrete_recs.py`. It is based on the locations of residential heating sources - receprors are denser near heating sources and less dense elsewhere 
+
  ### 3. Running CALPUFF
  CALPUFF is run for residential heating (`heat`) and NEIS (`neis`). Road traffic (`traffic`) is run externaly using ATMOSTREET model, and is added to the domain in postprocessing stage. 
  Before running CALPUFF, it is necessary to prepare **receptor points**  `~/cpf_proc/preproc/1_create_discrete_recs.py`. 
