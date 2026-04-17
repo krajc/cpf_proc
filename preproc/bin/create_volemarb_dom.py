@@ -109,7 +109,7 @@ if nancount > 0:
     
 
     
-infofile = f"/data/oko/krajc/dbase_calpuff/source_arb/heat_sources_{dom}_{year}.info"
+infofile = f"/work/users/oko001/cpf_proc/volemarb/heat_sources_{dom}_{year}.info"
 number = {}
 
 for houses in ['rd','bd','no','os']:
@@ -124,7 +124,7 @@ for houses in ['rd','bd','no','os']:
     e = cutout_domain(dom)
     etab = prepare_scaling_table(t)
     
-    outdir = f'{sourcedir}/volemarb_data/{dom}/{houses}'
+    outdir = f'/work/users/oko001/cpf_proc/volemarb/{dom}/{houses}'
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     else:

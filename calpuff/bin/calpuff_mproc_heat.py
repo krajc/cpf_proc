@@ -97,8 +97,8 @@ def run_calpuff(file):
     #clean_scratch(dom, date)
     
 def final_cleanup():
-    if os.path.exists(f'{scratchdir}/p2993'):
-        os.removedirs(f'{scratchdir}/p2993/tmp')
+    if os.path.exists(f'{scratchdir}/oko001'):
+        os.removedirs(f'{scratchdir}/oko001/tmp')
         #os.removedirs(f'{scratchdir}/p2993')
 
 # nasekanie files na 40 CPU useky:
@@ -109,15 +109,11 @@ def distribution_list(origlist, batchsize):
         
 start_time = time.perf_counter()
 
-#year = 2021
-#dom = "ruzomberok"
-#disk = "/data/oko/krajc"      # alebo:
 disk = args.disk
 year = args.year
 dom = args.domena
 group = args.group
 ggroup = args.ggroup
-#ggroups = ('fh','nfh')
 
 if calendar.isleap(year):
     nmetdat = 366
@@ -139,23 +135,22 @@ metdatstring = ""
 for m in metfiles:
     metdatstring = metdatstring + f'!  METDAT= {metdir}/{str(m)[:10]}.dat !   !END!\n'
 
-cpfdir = '/users/p2993/cpf_proc/calpuff'
-temp = f'{cpfdir}/bin/templates/calpuff7_{group}.inp.templ'
+temp = f'/users/oko001/cpf_proc/calpuff/bin/templates/calpuff7_{group}.inp.templ'
 with open(temp) as f_obj:
     templ = f_obj.readlines()
 templ = "".join(templ)
 
-sourcedir = '/data/oko/krajc/dbase_calpuff/source_arb/volemarb_data'
+sourcedir = '/work/users/oko001/cpf_proc/volemarb'
 volemdir = f'{sourcedir}/{dom}/{ggroup}'
 files = sorted(os.listdir(f'{volemdir}'))
 
 scratchdir = "/scratch"
-wrkdir = f'{scratchdir}/p2993'
-tmpdir = f'{scratchdir}/p2993/tmp'
+wrkdir = f'{scratchdir}/oko001'
+tmpdir = f'{scratchdir}/oko001/tmp'
 #tmpdir = '/work/users/p2993/tmp'
-cpfdir = f'/users/p2993/cpf_proc/calpuff/{dom}/{group}/{ggroup}'
-outdir = f'{disk}/data_cpf/calpuff/{year}/{dom}/{group}/{ggroup}'
-lstdir = f'/work/users/p2993/calpuff/{dom}/lst/{group}/{ggroup}'
+cpfdir = f'/work/users/oko001/cpf_proc/calpuff/{dom}/inp/{group}/{ggroup}'
+outdir = f'/work/users/oko001/data_cpf/calpuff/{year}/{dom}/{group}/{ggroup}'
+lstdir = f'/work/users/oko001/cpf_proc/calpuff/{dom}/lst/{group}/{ggroup}'
 
 # Ak nexistuju, vytvorit
 for dir in (cpfdir, outdir, lstdir, tmpdir):
@@ -210,9 +205,6 @@ cputime = (finish_time-start_time)/3600
 print(f"Program finished in {cputime: .2f} hours\n")
 # Removing scratchdir:
 final_cleanup()
-# Creating link to the other  output disk, if necessary:
-if disk != "/data/users/p2993" and not os.path.exists(f'/data/users/p2993/data_cpf/calpuff/{year}/{dom}'):
-    os.symlink(f'{disk}/data_cpf/calpuff/{year}/{dom}', f'/data/users/p2993/data_cpf/calpuff/{year}/{dom}')
 
          
 

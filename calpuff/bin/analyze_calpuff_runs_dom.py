@@ -16,10 +16,10 @@ group = 'heat'
 ggroups = ['rd','bd','no','os']
 
 for ggroup in ggroups:
-    lstdir = f'/work/users/p2993/calpuff/{dom}/lst/{group}/{ggroup}'
+    lstdir = f'/work/users/oko001/cpf_proc/calpuff/{dom}/lst/{group}/{ggroup}'
     #inpdir = f'/users/p2993/cpf_proc/calpuff/{dom}/{group}/{ggroup}'
-    inpdir = f'/users/p2993/dbase_calpuff/source_arb/volemarb_data/{dom}/{ggroup}'
-    rerunfile = f'/users/p2993/cpf_proc/calpuff/{dom}/rerun-{group}-{ggroup}.dat'
+    inpdir = f'/work/users/oko001/cpf_proc/volemarb/{dom}/{ggroup}'
+    rerunfile = f'/work/users/oko001/cpf_proc/calpuff/{dom}/rerun-{group}-{ggroup}.dat'
     
     print(f"Running CALPUFF check files for domain: {dom} - {ggroup} ...\n")
     
@@ -40,7 +40,7 @@ for ggroup in ggroups:
     else:
         inpfiles = sorted(os.listdir(inpdir))
         inpfiles = list(map(lambda x:x[9:], inpfiles))
-        statfile = f'/users/p2993/cpf_proc/calpuff/{dom}/stats-{dom}-{group}-{ggroup}.dat'
+        statfile = f'/work/users/oko001/cpf_proc/calpuff/{dom}/stats-{dom}-{group}-{ggroup}.dat'
     
     for file in inpfiles:
         body = file[:-4]

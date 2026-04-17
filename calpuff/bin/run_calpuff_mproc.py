@@ -20,12 +20,11 @@ year = 2024
 group = 'heat'
 ggroup = 'os'
 partition = 'user'
-disk = "/data/oko/krajc"      # alebo:
-#disk = "/data/users/p2993"
-submitdir = f'/users/p2993/cpf_proc/calpuff/{dom}/submit'
-logdir = f'/work/users/p2993/calpuff/{dom}/logs'
-rerunfile = f'/users/p2993/cpf_proc/calpuff/{dom}/rerun-{group}-{ggroup}.dat'
-sourcedir = '/data/oko/krajc/dbase_calpuff/source_arb/volemarb_data'
+disk = "/data/users/oko001"      
+submitdir = f'/work/users/oko001/cpf_proc/calpuff/{dom}/submit'
+logdir = f'/work/users/oko001/calpuff/{dom}/logs'
+rerunfile = f'/work/users/oko001/cpf_proc/calpuff/{dom}/rerun-{group}-{ggroup}.dat'
+sourcedir = '/work/users/oko001/cpf_proc/volemarb'
 volemdir = f'{sourcedir}/{dom}/{ggroup}'
 files = sorted(os.listdir(f'{volemdir}'))
 
@@ -56,7 +55,7 @@ if not os.path.exists(submitdir):
 if not os.path.exists(logdir):
     os.makedirs(logdir)
      
-exe = f"/users/p2993/cpf_proc/calpuff/bin/calpuff_mproc_{group}{tag}.py"
+exe = f"/users/oko001/cpf_proc/calpuff/bin/calpuff_mproc_{group}{tag}.py"
 
 for i in range(nnodes):    
     line1 = "#!/bin/bash\n"

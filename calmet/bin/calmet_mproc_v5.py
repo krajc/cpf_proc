@@ -60,13 +60,13 @@ islope = args.islope
 
 
 if terrad == 999:
-    calmettempl = "/users/p2993/cpf_proc/calmet/bin/templates/calmetWRF.templ"
+    calmettempl = "/users/oko001/cpf_proc/calmet/bin/templates/calmetWRF.templ"
 elif ikine == 999:
-    calmettempl = "/users/p2993/cpf_proc/calmet/bin/templates/calmet2024_terrad.templ"
+    calmettempl = "/users/oko001/cpf_proc/calmet/bin/templates/calmet2024_terrad.templ"
 elif ifradj == 999:
-    calmettempl = "/users/p2993/cpf_proc/calmet/bin/templates/calmet2024_terrad_ikine.templ"
+    calmettempl = "/users/oko001/cpf_proc/calmet/bin/templates/calmet2024_terrad_ikine.templ"
 else:
-    calmettempl = "/users/p2993/cpf_proc/calmet/bin/templates/calmet2024_ikine_ifradj_islope.templ"
+    calmettempl = "/users/oko001/cpf_proc/calmet/bin/templates/calmet2024_ikine_ifradj_islope.templ"
 
 #dom = 'ruzomberok'
 print(f'running domain: {dom}\n')
@@ -176,8 +176,8 @@ def run_calmet(date):
             os.remove(m3ddat)
             
 def final_cleanup():
-    if os.path.exists(f'{scratchdir}/p2993'):
-        os.removedirs(f'{scratchdir}/p2993/tmp')
+    if os.path.exists(f'{scratchdir}/oko001'):
+        os.removedirs(f'{scratchdir}/oko001/tmp')
         #os.removedirs(f'{scratchdir}/p2993')
 
 def clean_scratch(dom, date):
@@ -190,16 +190,16 @@ def clean_scratch(dom, date):
 #scratchdir = "/scratch"
 #$wrkdir = f'{scratchdir}/p2993'
 #tmpdir = f'{scratchdir}/p2993/tmp'
-tmpdir = '/work/users/p2993/tmp'
+tmpdir = '/work/users/oko001/tmp'
 #wrkdir = f'/work/users/p2993/calwrf/{dom}'
 #calwrfdir = '/users/p2993/cpf_proc/calwrf'
-calmetdir = '/users/p2993/cpf_proc/calmet'
-cwrkdir = '/work/users/p2993/calmet'
+calmetdir = '/work/users/oko001/cpf_proc/calmet'
+cwrkdir = '/work/users/oko001/cpf_proc/calmet'
 outdir = f'{disk}/data_cpf/calmet/{year}'
 rerunfile = f'{calmetdir}/rerun{year}_{dom}.inp'
 domdir = "/users/p2993/cpf_domeny"
 
-cinpdir = f"{calmetdir}/{dom}"
+cinpdir = f"{calmetdir}/{dom}/inp"
 # Data aladin cela SR vo formate 3D.dat (.m3d zatarovane gzip)
 m3ddir =   f'/data/oko/meteo/csv/{year}'
 # m3dtmp for extraction of m3d files:

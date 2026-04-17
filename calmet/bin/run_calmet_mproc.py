@@ -43,9 +43,12 @@ domset = {
     
 
 partition = 'user'
-disk = '/data/oko/krajc'
-submitdir = '/users/p2993/cpf_proc/calmet'
-logdir = f'/work/users/p2993/calmet/{domset["dom"]}/logs'
+#disk = '/data/oko/krajc'
+disk = '/data/users/oko001'
+calmetdir = '/users/oko001/cpf_proc/calmet'
+#submitdir = '/users/p2993/cpf_proc/calmet'
+submitdir = '/work/users/oko001/cpf_proc/calmet'
+logdir = f'/work/users/oko001/cpf_proc/calmet/logs/{domset["dom"]}/logs'
 rerunfile = f'{submitdir}/rerun{domset["year"]}_{domset["dom"]}.inp'
 # timeouts for partitions 
 timeouts = {
@@ -65,6 +68,9 @@ else:
     
 if not os.path.exists(logdir):
     os.makedirs(logdir)
+
+if not os.path.exists(submitdir):
+    os.makedirs(submitdir)   
     
 line1 = "#!/bin/bash\n"
     
@@ -79,7 +85,7 @@ with open(slurmscript, 'w') as f:
     f.write(f"#SBATCH --cpus-per-task={cpus}\n")
     f.write("#SBATCH --mem-per-cpu=4GB\n")
     f.write(f"#SBATCH --time={timeout}\n")
-    f.write(f"\n{submitdir}/bin/calmet_mproc.py {domset['dom']} {disk} {domset['year']} {domset['ztop']} {domset['terrad']} \
+    f.write(f"\n{calmetdir}/bin/calmet_mproc.py {domset['dom']} {disk} {domset['year']} {domset['ztop']} {domset['terrad']} \
             {domset['ikine']} {domset['ifradj']} {domset['islope']}\n")
 
 subprocess.run(['chmod','+x',slurmscript])

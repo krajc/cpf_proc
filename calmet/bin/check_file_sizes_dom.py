@@ -14,10 +14,10 @@ import calendar
 year = 2024
 dom = 'ruzomberok'
 #disk =  '/data/users/p2993'
-disk = '/data/oko/krajc'
-outdir = f'{disk}/data_cpf/calmet/{year}a'             # !!!!!!!!!!!!!!!!!!!!!!
-sizefile = f'/users/p2993/cpf_proc/calmet/calmetfilesize_{dom}.yml'
-rerunfile = f'/users/p2993/cpf_proc/calmet/rerun{year}_{dom}.inp'
+disk = '/data/users/oko001'
+outdir = f'{disk}/data_cpf/calmet/{year}'             
+sizefile = f'/work/users/oko001/cpf_proc/calmet/calmetfilesize_{dom}.yml'
+rerunfile = f'/work/users/oko001/cpf_proc/calmet/rerun{year}_{dom}.inp'
 
 print(f"Running CALMET check files for domain: {dom} ...\n")
 
@@ -43,7 +43,7 @@ for month in range(1,13):
             missing.append(f'{year}-{month:02d}-{day:02d}\n')
             print(f'{dom} {month} {day}')
         
-        # Tato cas je docasna, uz je zakomponovana v create_calmet_files:
+        # Tato cast je docasna, uz je zakomponovana v create_calmet_files:
         aux = f"{outdir}/{dom}/{year}-{month:02d}-{day:02d}.dat.aux"
         if os.path.exists(aux):
             os.remove(aux)
