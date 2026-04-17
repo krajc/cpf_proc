@@ -4,6 +4,7 @@
 **Root directory:**   *cpf_proc*
 
 **Sub dierectories:**
+- *aladin*
 - *preproc*
 - *calwrf*
 - *calmet*
@@ -18,19 +19,28 @@ All but one of the scripts is run on HPC3 cluster. One script (`~/python/CPF_pre
 
 ## Main steps
 
+### 0. Converting ALADIN meteo data to CALMET .m3d format
+`~/cpf_proc/aladin/bin/juraj_ALADIN2CALMET.py` 
+ 
 When processing a new domain from scratch, the following steps must be taken. Assuming we want to run CALPUFF for three main emission sectors: residential heating, NEIS and road traffic. 
 ### 1. Setting up the domain (or multiple domains)
-`~/cpf_proc/preproc/0_domains_for_CALPUFF.py` (`srv-atmosys`)
+`~/cpf_proc/preproc/bin/0_domains_for_CALPUFF.py` (`srv-atmosys`)
  
  Na zaklade manualne vytvorenej vrstvy .shp, vytvara .shp subory jednotlivych domen (Vystup: `/data/oko/krajc/cpf_domeny`),  `Creg` a `Mreg`  v `LCCcpf` mapsetoch, ` Domain_conf.yml` (parametre domeny), 
  `geo.dat` pre CALMET a `station_rec.yml` pre CALPUFF. (Vystupy: `/data/oko/krajc/dbase_calpuff/geodat/LCCcpf/<domena>`).
 
  Tento skript vytvorí všetky potrebné dáta a súbory pre spustenie CALMET (okrem meteodát). 
 
+ **POZNÁMKA**
+ (JK): Foldery s výstupmi tohto skriptu: `/data/oko/krajc/cpf_domeny/` a `/data/oko/krajc/dbase_calpuff/geodat/LCCcpf` sú zatiaľ pod mojim userom na atmosyse (nie je na ňom vytvorený user oko001)
+
  ### 2. Running CALMET
  Procedures for running CALMET are described in detail in [CALMET (`calmet`)](docs/calmet.md) 
  Before proceeding to the next step - running CALPUFF - it is advisable to look at the meteo data produced by CALMET and, if possible, validate them against a meteo station data, if available. 
  This is done through series of scripts described in [PRTMET (`prtmet`)](docs/prtmet.md)
+
+ ### 3. Preparing discrete receptors file
+ Before running CALPUFF, we need prepare receptor files, which is done in `~/cpf_proc/preproc/1_create_discrete_recs.py`. It is based on the locations of residential heating sources - receprors are denser near heating sources and less dense elsewhere 
 
  ### 3. Running CALPUFF
  CALPUFF is run for residential heating (`heat`) and NEIS (`neis`). Road traffic (`traffic`) is run externaly using ATMOSTREET model, and is added to the domain in postprocessing stage. 
