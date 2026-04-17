@@ -42,14 +42,23 @@ When processing a new domain from scratch, the following steps must be taken. As
  ### 3. Preparing discrete receptors file
  Before running CALPUFF, we need prepare receptor files, which is done in `~/cpf_proc/preproc/1_create_discrete_recs.py`. It is based on the locations of residential heating sources - receprors are denser near heating sources and less dense elsewhere 
 
- ### 3. Running CALPUFF
+ ### 4. Running CALPUFF
  CALPUFF is run for residential heating (`heat`) and NEIS (`neis`). Road traffic (`traffic`) is run externaly using ATMOSTREET model, and is added to the domain in postprocessing stage. 
  Before running CALPUFF, it is necessary to prepare **receptor points**  `~/cpf_proc/preproc/1_create_discrete_recs.py`. 
  Detailed guide for running CALPUFF for residential heating is described in [CALPUFF (`calpuff`)](docs/calpuff.md)
  Detailed guide for running CALPUFF for NEIS is described in [CALPUFF_neis (`calpuff_neis`)](docs/calpuff_neis.md)
 
 ## POSTPROCESSING
+Postprocessing involves several steps:
+### 1. Preparation of background concentrations
 
+### 2. Processing of road traffic concentrations from ATMOSTREET
+
+### 3. Producing total concentration maps (! includes RIO background timeseries production)
+
+### 4. Producing source apportionment graphs for monitoring stations and validation statistics
+
+### 5. Producing source apportionment maps
 
 ## Documentation
 
