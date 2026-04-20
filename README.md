@@ -55,21 +55,21 @@ When processing a new domain from scratch, the following steps must be taken. As
 This part of the process brings together the `heat` AND `neis` concentrations with the `road` concentrations produced by ATMOSTREET model, and 
 background concentrations from a regional model (RIO, CAMS or CMAQ).
 Outputs are in form of:
-- Total annual concentration maps and annual sector maps
-- Source apportionment (SA) graphs for the locations of monitoring stations
-- Tables with numerical values of SA for the locations of monitoring stations and validation statistics
+- Total annual concentration maps and annual sector maps (`/data/users/oko001/data_cpf/pics/{year}/{dom}/conc`)
+- Source apportionment (SA) graphs for the locations of monitoring stations (`/data/users/oko001/data_cpf/pics/{year}/{dom}/graphs`)
+- Tables with numerical values of SA for the locations of monitoring stations and validation statistics (`/data/users/oko001/data_cpf/pics/{year}/{dom}/SA`)
 
 Postprocessing involves several steps:
 
-### 1. Preparation of background concentrations
+1. Preparation of background concentrations
 
-### 2. Processing of road traffic concentrations from ATMOSTREET
+2. Processing of road traffic concentrations from ATMOSTREET
 
-### 3. Producing total concentration maps (! includes RIO background timeseries production)
+3. Producing total concentration maps (! includes RIO background timeseries production)
 
-### 4. Producing source apportionment graphs for monitoring stations and validation statistics
+4. Producing source apportionment graphs for monitoring stations and validation statistics
 
-### 5. Producing source apportionment maps
+5. Producing source apportionment maps
 
 ## Documentation
 
