@@ -71,12 +71,9 @@ Postprocessing involves several steps:
 
 5. Producing source apportionment maps
 
-## Documentation
-
-Detailná dokumentácia k jednotlivým krokom a ich nastaveniam sa nachádza v adresári `docs/`. Kliknutím na odkazy nižšie prejdeš na príslušnú časť:
+Details are explained in [Postprocessing (`postproc`)](docs/postproc.md).
 
 
-* [Postprocessing (`postproc`)](docs/postproc.md)
 * [Utilities (`utilities`)](docs/utilities.md)
 
 
