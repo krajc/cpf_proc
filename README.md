@@ -14,7 +14,7 @@
 - *prtmet*
 - *utilities*
 
-Each of the subdirectories contains *bin* directory with a number of scripts. The order of the processing pretty much follows the order of the subdirectories above. 
+Each of the subdirectories contains *bin* directory with a number of scripts. The order of the processing follows the order of the subdirectories above. 
 All but one of the scripts is run on HPC3 cluster. One script (`~/python/CPF_preproc/0_domains_for_CALPUFF.py`) is run on **srv-atmosys** because it requires GRASS GIS for processing.
 
 ## Main steps
@@ -54,7 +54,7 @@ When processing a new domain from scratch, the following steps must be taken. As
 ## POSTPROCESSING
 This part of the process brings together the `heat` AND `neis` concentrations with the `road` concentrations produced by ATMOSTREET model, and 
 background concentrations from a regional model (RIO, CAMS or CMAQ).
-Outputs are in form of:
+Outputs are in the form of:
 - Total annual concentration maps and annual sector maps (`/data/users/oko001/data_cpf/pics/{year}/{dom}/conc`)
 - Source apportionment (SA) graphs for the locations of monitoring stations (`/data/users/oko001/data_cpf/pics/{year}/{dom}/graphs`)
 - Tables with numerical values of SA for the locations of monitoring stations and validation statistics (`/data/users/oko001/data_cpf/pics/{year}/{dom}/SA`)
