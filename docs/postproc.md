@@ -30,6 +30,7 @@ Bod pozadia a casovy rad z tohto bodu sa vybera az v kroku 3.
 ATMOSTREET vypocitava PM zvlast pre priame emisie a zvlast pre resuspenziu. Pred dalsim spracovanim je potrebne 
 tieto dva prispevky spocitat. Skript pri prvom spusteni pre dany rok vypocita sucet pre celu domenu a z .csv pre receptory stanic 
 (vsetky su v jednom subore). Nasledne uz sa spustaju iba jednotlive domeny (vytvorenie vyrezov). 
+
 `/users/p2993/cpf_proc/postproc/bin/atmostreet_postproc_road.py `
 
 ## 3. Producing total concentration maps (! includes RIO background timeseries production)
