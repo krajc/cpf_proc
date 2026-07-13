@@ -35,13 +35,17 @@ tieto dva prispevky spocitat. Skript pri prvom spusteni pre dany rok vypocita su
 ## 3. Producing total concentration maps (! includes RIO background timeseries production)
 Skript nacita polia koncentracii pre jednotlive prispevky, da ich do spolocneho gridu a pripocita pozadie, urobi rocne priemery. 
 Dolezite je, ze vyprodukuje zaroven aj casove rady RIO pozadia pre bod pozadia (konstantne priestorove pole). 
+
 `/users/oko001/cpf_proc/postproc/bin/plot_total_maps_optional_bckg.py`
 
 
 ## 4. Producing source apportionment graphs for monitoring stations and validation statistics
 Kedze mame moznosti 3 pozadi, mozeme ich skriptom graficky porovnat:
+
 `/users/oko001/cpf_proc/postproc/bin/plot_daily_SA_graphs_compare_allbckg.py`
+
 Ak zvolime niektory z nich, pravdepodobne RIO, tak pouzijeme na konecne obrazky grafov:
+
 `/users/oko001/cpf_proc/postproc/bin/plot_daily_SA_graphs_from_grid_2024.py`
 
 
