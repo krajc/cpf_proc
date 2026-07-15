@@ -45,12 +45,16 @@ Kedze mame moznosti 3 pozadi, mozeme ich skriptom graficky porovnat:
 
 `/users/oko001/cpf_proc/postproc/bin/plot_daily_SA_graphs_compare_allbckg.py`
 
-Ak zvolime niektory z nich, pravdepodobne RIO, tak pouzijeme na konecne obrazky grafov:
+Ak zvolime niektory z nich, pravdepodobne RIO, tak pouzijeme na konecne obrazky grafov (a xls subory statistik):
 
 `/users/oko001/cpf_proc/postproc/bin/plot_daily_SA_graphs_from_grid_2024.py`
 
 
 ## 5. Validation
+
+Tento skript nam pomoze rozhodnut ktore z pozadi je najvhodnejsie. POZOR: Validacia sa spusta iba pre domeny, ktore obsahuju monitorovaciu stanicu. 
+Pre tieto domeny je potrebne spustit skript `plot_daily_SA_graphs_from_grid_2024.py` pre vsetky druhy pozadia, aby sa vyprodukovali potrebne statistiky 
+(xls subory pre jednotlive kombinacie domena/pozadie/polutant). 
 
 `/users/oko001/cpf_proc/postproc/bin/validation.py`
 
