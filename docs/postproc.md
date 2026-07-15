@@ -15,6 +15,10 @@ Vzhľadom na vysoké rozlíšenie modelu je potrebné najprv z veľkých .tiff s
 
 `/users/p2993/cpf_proc/postproc/bin/run_cutout_doms_RIO.py`
 
+V tomto kroku je vhodne vytiahnut casovy rad hodnot RIO v bode AMS stanice (pre neskorsie vyuzitie pri validacii):
+
+`/users/oko001/cpf_proc/postproc/bin/get_RIO_timeseries_AMS.py`
+
 Bod pozadia a casovy rad z tohto bodu sa vybera az v kroku 3. 
 
 **CMAQ**
