@@ -48,7 +48,7 @@ When processing a new domain from scratch, the following steps must be taken. As
  Detailed guide for running CALPUFF for residential heating is described in [CALPUFF (`calpuff`)](docs/calpuff.md)
  Detailed guide for running CALPUFF for NEIS is described in [CALPUFF_neis (`calpuff_neis`)](docs/calpuff_neis.md)
 
- ### 5. Running CALPOST and prepraring NETCDF files for `heat` and `neis` sectors
+ ### 5. Running CALPOST and preparing NETCDF files for `heat` and `neis` sectors
  .... doplni katka/janka .....
 
 ## POSTPROCESSING
