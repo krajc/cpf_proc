@@ -49,7 +49,13 @@ When processing a new domain from scratch, the following steps must be taken. As
  Detailed guide for running CALPUFF for NEIS is described in [CALPUFF_neis (`calpuff_neis`)](docs/calpuff_neis.md)
 
  ### 5. Running CALPOST and prepraring NETCDF files for `heat` and `neis` sectors
- .... doplni katka/janka .....
+ ####1.	Vygenerovanie calsum*.inp suborov 
+Skript: /users/ext33340/python_skripty/generate_calsum_baliky.py
+Upozornenie: nazov  *.lst suboru !!!!! POZOR nesmie byt zadane fo forme "absolute path" !!!
+        ( v /data/users/oko102/mod/calsum/CALSUM_v7.1.0_L190131/calsum.for boli robene zasahy a toto nie je osetrene,
+ak je tam "absolute path", calsum pada na chybe)
+pouzivame calsum: /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
+
 
 ## POSTPROCESSING
 This part of the process brings together the `heat` AND `neis` concentrations with the `road` concentrations produced by ATMOSTREET model, and 
