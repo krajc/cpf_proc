@@ -48,8 +48,33 @@ When processing a new domain from scratch, the following steps must be taken. As
  Detailed guide for running CALPUFF for residential heating is described in [CALPUFF (`calpuff`)](docs/calpuff.md)
  Detailed guide for running CALPUFF for NEIS is described in [CALPUFF_neis (`calpuff_neis`)](docs/calpuff_neis.md)
 
- ### 5. Running CALPOST and preparing NETCDF files for `heat` and `neis` sectors
- .... doplni katka/janka .....
+ ### 5. Running CALSUM, CALPOST and preparing NETCDF files for `heat` and `neis` sectors
+ #### 1.	CALSUM - Summing output files (such as concentration files CONC.DAT) from multiple independent CALPUFF  runs (output from 4).
+
+ ##### a) Create the Input Control Files (CALSUM.INP) 
+script: /users/ext33340/python_skripty/generate_calsum_baliky.py.  
+calsum version used : /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
+
+>[!NOTE]
+>The file name of the *.lst file must not be entered as an "absolute path" !!!
+  
+ #####  b) Execute CALSUM
+
+ #### 2.	 CALPOST: Generating hourly time series from  binary output files produced by CALSUM for
+- Regular grid receptors  
+- Discrete receptors   
+- AMS receptors, or points of interest  
+
+##### a) Create the Input Control Files (CALPOST.INP)
+For all types of receptors, a single script is used; however, the user must update the script settings depending on the receptor type.  
+
+script: /users/ext33340/python_skripty/create_calpost_inp.py
+calpost version used: /users/p2828/mod/calpost/CALPOST_v7.2.0_L150720/calpost.x  
+
+ #### 3.	Generating netcdf files using python scripts
+##### a)	Grid receptors: */users/ext33340/python_skripty/calpost_timeseries_to_xarray_grid.py*
+##### b) Discrete receptors: */users/ext33340/python_skripty/calpost_timeseries_to_xarray.py*
+
 
 ## POSTPROCESSING
 This part of the process brings together the `heat` AND `neis` concentrations with the `road` concentrations produced by ATMOSTREET model, and 
