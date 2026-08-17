@@ -11,6 +11,7 @@ Pred spustením modelu CALPUFF je potrebné mať pre daný simulovaný rok:
 
 - Celkové ročné koncentrácie pre jednotlivé ZL z emisného modelu REM3 (__odkaz na manual k modelu REM3__)
 - ASCII subory s casovo premenlivymi emisiami pre jednotlive gridove stvorce, ktore su vystupom z `~/cpf_proc/preproc/bin/create_volemarb_dom.py`
+  
 **`~/cpf_proc/calpuff/bin/`**
 
 `run_calpuff_mproc.py` spusta `calpuff_mproc_heat.py` na zaklade casovo premenlivych `volemarb.dat` suborov v `~/dbase_calpuff/source_arb/<dom>/.` Mnozstvo zdrojov rozdeluje na batche (default 200 na 1 node, ale da sa zmenit) a zdroje rozhodi na prislusne potrebne mnozstvo nodov. 
