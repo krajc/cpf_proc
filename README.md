@@ -56,7 +56,7 @@ script: /users/ext33340/python_skripty/generate_calsum_baliky.py.
 calsum version used : /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
 
 >[!NOTE]
->The file name of the *.lst file must not be entered as an "absolute path" !!!
+>The file name of the *.dat file must not be entered as an "absolute path" !!!
   
  #####  b) Execute CALSUM
 
