@@ -52,11 +52,11 @@ When processing a new domain from scratch, the following steps must be taken. As
  #### 1.	CALSUM - Summing output files (such as concentration files CONC.DAT) from multiple independent CALPUFF  runs (output from 4).
 
  ##### a) Create the Input Control Files (CALSUM.INP) 
-script: /users/ext33340/python_skripty/generate_calsum_baliky.py.  
+script: /users/oko001/cpf_proc/calsum/bin/generate_calsum_baliky.py  
 calsum version used : /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
 
 >[!NOTE]
->The file name of the *.dat file must not be entered as an "absolute path" !!!
+>The file name of the *.dat/*.lst files must not be entered as an "absolute path" !!!
   
  #####  b) Execute CALSUM
 
