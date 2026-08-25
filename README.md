@@ -58,7 +58,7 @@ calsum version used : /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
 >[!NOTE]
 >The file name of the *.dat/*.lst files must not be entered as an "absolute path" !!!
   
- #####  b) Execute CALSUM
+ #####  b) Execute CALSUM (dorobit automatizaciu)
 
  #####  c) Check CALSUM *.lst files 
  script: /users/oko001/cpf_proc/calsum/bin/calsum_output_check.py
@@ -71,8 +71,16 @@ calsum version used : /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
 ##### a) Create the Input Control Files (CALPOST.INP)
 For all types of receptors, a single script is used; however, the user must update the script settings depending on the receptor type.  
 
-script: /users/ext33340/python_skripty/create_calpost_inp.py
+script: /users/oko001/cpf_proc/calpost/bin/create_calpost_inp.py
 calpost version used: /users/p2828/mod/calpost/CALPOST_v7.2.0_L150720/calpost.x  
+calpost input template file: /users/oko001/cpf_proc/calpost/bin/calpost_sample.inp
+
+> [!IMPORTANT]
+> Parameters that must be configured in the script:
+> group (group of emission sources: heat, neis)
+> year
+> grid='N' (type of receptors, for grid receptors grid='Y')
+> domeny (modeling domains)
 
  #### 3.	Generating netcdf files using python scripts
 ##### a)	Grid receptors: */users/ext33340/python_skripty/calpost_timeseries_to_xarray_grid.py*
