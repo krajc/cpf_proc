@@ -60,6 +60,9 @@ calsum version used : /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
   
  #####  b) Execute CALSUM
 
+ #####  c) Check CALSUM *.lst files 
+ script: /users/oko001/cpf_proc/calsum/bin/calsum_output_check.py
+
  #### 2.	 CALPOST: Generating hourly time series from  binary output files produced by CALSUM for
 - Regular grid receptors  
 - Discrete receptors   
