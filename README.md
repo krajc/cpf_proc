@@ -77,10 +77,15 @@ calpost input template file: /users/oko001/cpf_proc/calpost/bin/calpost_sample.i
 
 > [!IMPORTANT]
 > Parameters that must be configured in the script:
+> 
 > group (group of emission sources: heat, neis)
+> 
 > year
+> 
 > grid='N' (type of receptors, for grid receptors grid='Y')
+> 
 > domeny (modeling domains)
+> 
 
  #### 3.	Generating netcdf files using python scripts
 ##### a)	Grid receptors: */users/ext33340/python_skripty/calpost_timeseries_to_xarray_grid.py*
