@@ -52,8 +52,8 @@ When processing a new domain from scratch, the following steps must be taken. As
  #### 1.	CALSUM - Summing output files (such as concentration files CONC.DAT) from multiple independent CALPUFF  runs (output from 4).
 
  ##### a) Create the Input Control Files (CALSUM.INP) 
-script: /users/oko001/cpf_proc/calsum/bin/generate_calsum_baliky.py  
-calsum version used : /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
+**script:** /users/oko001/cpf_proc/calsum/bin/generate_calsum_baliky.py  
+**calsum version used:** /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
 
 >[!NOTE]
 >The file name of the *.dat/*.lst files must not be entered as an "absolute path" !!!
@@ -69,11 +69,11 @@ calsum version used : /users/p2828/mod/CALSUM_v7.1.0_L190131/calsum.x
 - AMS receptors, or points of interest  
 
 ##### a) Create the Input Control Files (CALPOST.INP)
-For all types of receptors, a single script is used; however, the user must update the script settings depending on the receptor type.  
+For all types of receptors, a single script is used; however, the user must update the script settings depending on the receptor type (parameter grid).  
 
-script: /users/oko001/cpf_proc/calpost/bin/create_calpost_inp.py
-calpost version used: /users/p2828/mod/calpost/CALPOST_v7.2.0_L150720/calpost.x  
-calpost input template file: /users/oko001/cpf_proc/calpost/bin/calpost_sample.inp
+**script:** /users/oko001/cpf_proc/calpost/bin/create_calpost_inp.py
+**calpost version used:** /users/p2828/mod/calpost/CALPOST_v7.2.0_L150720/calpost.x  
+**calpost input template file:** /users/oko001/cpf_proc/calpost/bin/calpost_sample.inp
 
 > [!IMPORTANT]  
 > **Parameters that must be configured in the script:**  
