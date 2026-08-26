@@ -76,7 +76,9 @@ The script generates a Bash file named `~/cpf_proc/calpost/bin/run_calpost_<grou
 **calpost version used:** /users/p2828/mod/calpost/CALPOST_v7.2.0_L150720/calpost.x  
 **calpost input template file:** /users/oko001/cpf_proc/calpost/bin/calpost_sample.inp
 
-
+#####  b) Execute CALPOST
+Submit `~/cpf_proc/calpost/bin/run_calpost_<group>` to Slurm. 
+For all specified domains and groups, the script generates time series, checks each run's output, and deletes the associated .lst file.  
 
  #### 3.	Generating netcdf files using python scripts
 ##### a)	Grid receptors: */users/ext33340/python_skripty/calpost_timeseries_to_xarray_grid.py*
