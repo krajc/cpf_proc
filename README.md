@@ -71,16 +71,11 @@ When processing a new domain from scratch, the following steps must be taken. As
 ##### a) Create the Input Control Files (CALPOST.INP)
 For all types of receptors, a single script is used; however, the user must update the script settings depending on the receptor type (parameter grid).  
 
-**script:** /users/oko001/cpf_proc/calpost/bin/create_calpost_inp.py
+**script:** /users/oko001/cpf_proc/calpost/bin/create_calpost_inp.py.  
+The script generates a Bash file named run_calpost_<group>, which is submitted to Slurm using sbatch run_calsum
 **calpost version used:** /users/p2828/mod/calpost/CALPOST_v7.2.0_L150720/calpost.x  
 **calpost input template file:** /users/oko001/cpf_proc/calpost/bin/calpost_sample.inp
 
-> [!IMPORTANT]  
-> **Parameters that must be configured in the script:**  
-> **group** (group of emission sources: heat, neis)    
-> **year**    
-> **grid** (type of receptors, for grid receptors grid='Y')  
-> **domeny** (modeling domains)  
 
 
  #### 3.	Generating netcdf files using python scripts
