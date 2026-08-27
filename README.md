@@ -79,7 +79,7 @@ The script generates a Bash file named `~/cpf_proc/calpost/bin/run_calpost_<grou
 #####  b) Execute CALPOST
 **Submit** `~/cpf_proc/calpost/bin/run/run_calpost_<year>_<group>` to Slurm. 
 For all specified domains and groups, the script generates time series, checks each run's output, and deletes the associated .lst file.  
-**The folder structure** storing the time series data is as follows:/work/users/oko001/cpf_proc/calpost/<year>/<dom>/<group>/timeseries/<ggroup>
+**The folder structure** storing the time series data is as follows:`/work/users/oko001/cpf_proc/calpost/<year>/<dom>/<group>/timeseries/<ggroup>`
 
 #####  c) check size of timeseries files 
 **script:** `~/cpf_proc/calpost/bin/check_timeseries_size.py`
@@ -87,7 +87,7 @@ This check verifies and compares timeseries file sizes to ensure that all runs c
 
  #### 3.	Generating netcdf files using python scripts
 **script:** `~/cpf_proc/calpost/bin/calpost_timeseries_to_xarray_batch.py`
-This is the core script, which takes positional command-line arguments in this order: dom group ggroup year.  
+This is the core script, which takes positional command-line arguments in this order: `<dom> <group> <ggroup> <year>`.  
 
 ## POSTPROCESSING
 This part of the process brings together the `heat` AND `neis` concentrations with the `road` concentrations produced by ATMOSTREET model, and 
